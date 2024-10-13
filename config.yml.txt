@@ -1,0 +1,39 @@
+NegativeSecurityTestMaster:
+    org: OPPSDEV_oppsdevpipesaas1
+    space: integration
+    apiEndpoint: https://api.cf.eu10.hana.ondemand.com
+    deployUser: CF_PUSER_CREDENTIALS_TEST 
+    endpointGroups:
+      Calculation:
+        serviceInstance: ppservice-calc-oppsdevpipesaas1-inst
+        serviceKey: ppservice-calc-oppsdevpipesaas1-key
+        incorrectServiceInstance: ppservice-inbound-oppsdevpipesaas1-inst
+        incorrectServiceKey:   ppservice-inbound-oppsdevpipesaas1-key
+        authType: "tokenAuth"
+        endpoints:
+          - url: "https://ppservice-calc-cf-oppsdevpipeline-integration.cfapps.eu10.hana.ondemand.com/restapi/oppsdevpipesaas1"
+            methods:
+              - "POST"
+      Data-Upload:
+        serviceInstance: ppservice-inbound-oppsdevpipesaas1-inst
+        serviceKey: ppservice-inbound-oppsdevpipesaas1-key
+        incorrectServiceInstance: ppservice-calc-oppsdevpipesaas1-inst
+        incorrectServiceKey: ppservice-calc-oppsdevpipesaas1-key
+        authType: "tokenAuth"
+        endpoints:
+          - url: "https://ppservice-inbound-cf-oppsdevpipeline-integration.cfapps.eu10.hana.ondemand.com/idocinbound"
+            methods:
+              - "POST" 
+      Data-Read:
+        serviceInstance: ppservice-odata-oppsdevpipesaas1-inst
+        serviceKey: ppservice-odata-oppsdevpipesaas1-key
+        incorrectServiceInstance: ppservice-calc-oppsdevpipesaas1-inst
+        incorrectServiceKey: ppservice-calc-oppsdevpipesaas1-key
+        authType: "tokenAuth"
+        endpoints:
+          - url: "https://ppservice-odata-cf-oppsdevpipeline-integration.cfapps.eu10.hana.ondemand.com/odata/v2/OPPS/BasePrices"
+            methods:
+              - "GET"
+          - url: "https://ppservice-odata-cf-oppsdevpipeline-integration.cfapps.eu10.hana.ondemand.com/odata/v2/OPPS/Promotions"
+            methods:
+              - "GET"  
